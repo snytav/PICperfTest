@@ -1152,7 +1152,7 @@ __global__ void GPU_CurrentsAllCells(GPUCell  **cells,int nt,
 	__shared__ CellDouble fdz[CURRENT_SUM_BUFFER_LENGTH];
 
 
-
+	int index = threadIdx.x + blockDim.x*threadIdx.y;
 
 	c = cells[ c0->getGlobalCellNumber(blockIdx.x,blockIdx.y,blockIdx.z)];
 
@@ -1162,17 +1162,17 @@ __global__ void GPU_CurrentsAllCells(GPUCell  **cells,int nt,
 				threadIdx,blockIdx,blockDim);
 
 
-	copyFieldsToSharedMemory3(c_jx,c_jy,c_jz,c->Jx,c->Jy,c->Jz,c,threadIdx.x,blockIdx,blockDim.x);
+	copyFieldsToSharedMemory3(c_jx,c_jy,c_jz,c->Jx,c->Jy,c->Jz,c,index,blockIdx,blockDim.x);
 	if((c->i == 28) && (c->l == 3) && (c->k == 2) && (nt == 1))
     {
 	   loop_copyCellDouble(c_jx_b,c_jx,c,threadIdx.x,blockIdx,blockDim.x);
     }
 	 if((c->i == 28) && (c->l == 3) && (c->k == 2) && (nt == 1))
 	               {
-	               	b_c_jx_222[threadIdx.x] = c_jx->M[2][2][2];
+	               	b_c_jx_222[index] = c_jx->M[2][2][2];
 	               }
 
-    int index = threadIdx.x + blockDim.x*threadIdx.y;
+   // int index = threadIdx.x + blockDim.x*threadIdx.y;
 
 	AccumulateCurrentWithParticlesInCell(&(fdx[0]),c_jy,c_jz,
 							 c,index,blockDim.x*blockDim.y,nt,

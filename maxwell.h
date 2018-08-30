@@ -49,11 +49,12 @@ int writeParamsFile(double tex0,double tey0,double tez0,
 	                      int ts,int ms,int phase
 	                      );
 
-int getUniformMaxwellianParticles(
-		std::vector<Particle>  & ion_vp,
-		                           std::vector<Particle>  & el_vp,
-		                           std::vector<Particle>  & beam_vp
-		                           );
+int getUniformMaxwellianParticles(std::vector<Particle>  & ion_vp,
+        std::vector<Particle>  & el_vp,
+        std::vector<Particle>  & beam_vp,
+        std::vector<Particle>  & ion_vp_local,
+        		                           std::vector<Particle>  & el_vp_local,
+        		                           std::vector<Particle>  & beam_vp_local);
 
 int convertParticleArraysToSTLvector(
     		  double *dbg_x,

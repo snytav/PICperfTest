@@ -126,12 +126,13 @@ virtual void InitializeCPU()
    }
    else
    {
-	   getUniformMaxwellianParticles(ion_vp1,el_vp1,beam_vp1);
+	   getUniformMaxwellianParticles(ion_vp1,el_vp1,beam_vp1,
+			                         ion_vp, el_vp, beam_vp);
 
    }
 
 
-   addAllParticleListsToCells(ion_vp1,el_vp1,beam_vp1);
+   addAllParticleListsToCells(ion_vp,el_vp,beam_vp);
 
    AssignArraysToCells();
 
