@@ -748,10 +748,12 @@ int getUniformMaxwellianParticles(std::vector<Particle>  & ion_vp,
 	 		 BEAM_ELECTRON,
 	 		 beam_vp);
 
-	 puts("filtering beam...");
+	 beam_vp_local = beam_vp;
 
-	 mpiDomainParticleFilter(beam_vp,beam_vp_local);
-	 puts("end ");
+//	 puts("filtering beam...");
+//
+//	 mpiDomainParticleFilter(beam_vp,beam_vp_local);
+//	 puts("end ");
 
 	 convertParticleArraysToSTLvector(
 			 ions.dbg_x,
@@ -766,7 +768,8 @@ int getUniformMaxwellianParticles(std::vector<Particle>  & ion_vp,
 	 		 ION,
 	 		 ion_vp);
 
-	 mpiDomainParticleFilter(ion_vp,ion_vp_local);
+//	 mpiDomainParticleFilter(ion_vp,ion_vp_local);
+	 ion_vp_local = ion_vp;
 
 	 convertParticleArraysToSTLvector(
 	 			 electrons.dbg_x,
@@ -781,7 +784,8 @@ int getUniformMaxwellianParticles(std::vector<Particle>  & ion_vp,
 	 	 		 PLASMA_ELECTRON,
 	 	 		 el_vp);
 
-	 mpiDomainParticleFilter(el_vp,el_vp_local);
+//	 mpiDomainParticleFilter(el_vp,el_vp_local);
+	 el_vp_local = el_vp;
 
 	return 0;
 
