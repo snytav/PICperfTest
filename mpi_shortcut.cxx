@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include "archAPI.h"
 
+#include "mpi_shortcut.h"
+
 int InitMPI(int argc,char *argv[])
 {
 	MPI_Init(&argc,&argv);
@@ -42,7 +44,9 @@ int sumMPI(int size,double *d_jx,double *d_jy,double *d_jz)
         snd[i + 2*size] = jz[i];
     }
 
+    printf("before reduce %d \n",getRank());
     MPI_Allreduce(snd,rcv,size,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD);
+    printf("after reduce %d \n",getRank());
     
     for(i = 0;i < size;i++)
     {   
